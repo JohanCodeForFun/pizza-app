@@ -39,19 +39,22 @@ addnewPizza({  name: "BBQ veggie", price: 18})
 
 function placeOrder(pizzaname: string) {
   const foundPizza = menu.find(pizzaObj => pizzaObj.name === pizzaname)
-  if (foundPizza !== undefined) {
-    cashInRegister += foundPizza.price
-
-    const newOrder: Order = { 
-      id: orderId++,
-      pizza: foundPizza, 
-      status: "ordered"
-    }
-  
-    orderQueue.push(newOrder)
-  
-    return newOrder
+  if (!foundPizza) {
+    console.error(`${pizzaname} not found.`)
+    return
   }
+
+  cashInRegister += foundPizza.price
+
+  const newOrder: Order = { 
+    id: orderId++,
+    pizza: foundPizza, 
+    status: "ordered"
+  }
+
+  orderQueue.push(newOrder)
+
+  return newOrder
 
 }
 
