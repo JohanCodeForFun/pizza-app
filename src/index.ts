@@ -18,7 +18,7 @@ function addnewPizza(pizzaObj: Pizza) {
 type Order = {
   id: number
   pizza: Pizza
-  status: string
+  status: "ordered" | "completed"
 }
 
 type Pizza = {
