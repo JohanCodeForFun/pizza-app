@@ -6,14 +6,25 @@ const menu = [
 ]
 
 let cashInRegister = 100
-const orderQeue = []
+const orderQueue: Order[] = [];
 let orderId = 1
 
-function addnewPizza(pizzaObj) {
+function addnewPizza(pizzaObj: Pizza) {
   menu.push(pizzaObj)
 }
 
 // console.log(menu)
+
+type Order = {
+  id: number
+  pizza: Pizza
+  status: string
+}
+
+type Pizza = {
+  name: string;
+  price: number
+}
 
 const newPizza = {
   name: "woowzi",
@@ -26,19 +37,22 @@ addnewPizza({  name: "BBQ veggie", price: 18})
 
 // console.log(menu)
 
-function placeOrder(pizzaname) {
+function placeOrder(pizzaname: string) {
   const foundPizza = menu.find(pizzaObj => pizzaObj.name === pizzaname)
-  cashInRegister += foundPizza.price
+  if (foundPizza !== undefined) {
+    cashInRegister += foundPizza.price
 
-  const newOrder = { 
-    id: orderId++,
-    pizza: foundPizza, 
-    status: "ordered"
+    const newOrder: Order = { 
+      id: orderId++,
+      pizza: foundPizza, 
+      status: "ordered"
+    }
+  
+    orderQueue.push(newOrder)
+  
+    return newOrder
   }
 
-  orderQeue.push(newOrder)
-
-  return newOrder
 }
 
 placeOrder("Margerita")
@@ -46,11 +60,14 @@ placeOrder("veggie POW")
 placeOrder("BBQ veggie")
 placeOrder("woowzi")
 
-function completeOrder(orderId) {
-  const order = orderQeue.find(order => order.id === orderId)
-  order.status = "completed"
+function completeOrder(orderId: number) {
+  const order = orderQueue.find(order => order.id === orderId)
+  if (order !== undefined) {
+    order.status = "completed"
+    
+    return order
+  }
 
-  return order
 }
 
 completeOrder(12)
@@ -59,6 +76,6 @@ completeOrder(3)
 
 console.log("Menu:", menu)
 console.log("Cash in register:", cashInRegister)
-console.log("Order Qeue:", orderQeue)
+console.log("Order Qeue:", orderQueue)
 
 
