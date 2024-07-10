@@ -9,7 +9,7 @@ let cashInRegister = 100
 const orderQueue: Order[] = [];
 let orderId = 1
 
-function addnewPizza(pizzaObj: Pizza) {
+function addnewPizza(pizzaObj: Pizza): void {
   menu.push(pizzaObj)
 }
 
@@ -38,7 +38,7 @@ addnewPizza({ id: 6, name: "veggie POW", price: 15 })
 addnewPizza({ id: 7, name: "BBQ veggie", price: 18 })
 addnewPizza({ id: 8, name: "no tomato sauce", price: 18 })
 
-function placeOrder(pizzaname: string) {
+function placeOrder(pizzaname: string): Order | undefined {
   const foundPizza = menu.find(pizzaObj => pizzaObj.name === pizzaname)
   if (!foundPizza) {
     console.error(`${pizzaname} not found.`)
