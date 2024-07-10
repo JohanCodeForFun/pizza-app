@@ -11,10 +11,12 @@ const menu: Pizza[] = [
 ]
 
 function addnewPizza(pizzaObj: Omit<Pizza, "id">): Pizza {
-  const newPizza = { id: nextPizzaId++, ...pizzaObj }
+  const newPizza: Pizza = {
+    id: nextPizzaId++,
+    ...pizzaObj
+  }
   
   menu.push(newPizza)
-
   return newPizza
 }
 
@@ -42,6 +44,8 @@ addnewPizza({ name: "woowzi", price: 12 })
 addnewPizza({ name: "veggie POW", price: 15 })
 addnewPizza({ name: "BBQ veggie", price: 18 })
 addnewPizza({ name: "no tomato sauce", price: 18 })
+addnewPizza({ name: "bamse special", price: 21 })
+
 
 function placeOrder(pizzaname: string): Order | undefined {
   const foundPizza = menu.find(pizzaObj => pizzaObj.name === pizzaname)
@@ -99,7 +103,5 @@ function getPizzaDetail(identifier: string | number): Pizza | undefined {
 }
 
 console.log(getPizzaDetail(2))
-
-addnewPizza({ name: "bamse special", price: 13 })
 
 console.log("menu:", menu)
