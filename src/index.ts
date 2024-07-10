@@ -10,7 +10,7 @@ const menu: Pizza[] = [
   { id: nextPizzaId++, name: "Veggie", price: 9 },
 ]
 
-function addnewPizza(pizzaObj: Pizza): void {
+function addnewPizza(pizzaObj: Omit<Pizza, "id">): void {
   const newPizza = { id: nextPizzaId++, ...pizzaObj }
   
   menu.push(newPizza)
@@ -22,7 +22,7 @@ type Order = {
 }
 
 type Pizza = {
-  id?: number
+  id: number
   name: string;
   price: number
 }
