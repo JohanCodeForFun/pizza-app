@@ -12,7 +12,7 @@ const users: User[] = [
   { id: 3, username: "Chad", role: "contributor" },
 ]
 
-function updateUser(id: number, updates: updateUser) {
+function updateUser(id: number, updates: UpdatedUser) {
   const userToUpdate = users.find(user => user.id === id)
   if (!userToUpdate) {
     console.error("User not found.")
