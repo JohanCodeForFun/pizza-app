@@ -1,8 +1,8 @@
-const menu = [
-  { name: "Margerita", price: 8},
-  { name: "Pepperoni", price: 10},
-  { name: "Hawaiian", price: 10},
-  { name: "Veggie", price: 9},
+const menu: Pizza[] = [
+  { id: 1, name: "Margerita", price: 8 },
+  { id: 2, name: "Pepperoni", price: 10 },
+  { id: 3, name: "Hawaiian", price: 10 },
+  { id: 4, name: "Veggie", price: 9 },
 ]
 
 let cashInRegister = 100
@@ -13,17 +13,19 @@ function addnewPizza(pizzaObj: Pizza) {
   menu.push(pizzaObj)
 }
 
-// console.log(menu)
-
 type Order = {
-  id: number
   pizza: Pizza
   status: "ordered" | "completed"
 }
 
 type Pizza = {
+  id: number
   name: string;
   price: number
+}
+
+type Identifier = {
+  input: string | number
 }
 
 const newPizza = {
@@ -31,11 +33,10 @@ const newPizza = {
   price: 12
 }
 
-addnewPizza({  name: "woowzi", price: 12})
-addnewPizza({  name: "veggie POW", price: 15})
-addnewPizza({  name: "BBQ veggie", price: 18})
-
-// console.log(menu)
+addnewPizza({ id: 5, name: "woowzi", price: 12 })
+addnewPizza({ id: 6, name: "veggie POW", price: 15 })
+addnewPizza({ id: 7, name: "BBQ veggie", price: 18 })
+addnewPizza({ id: 8, name: "no tomato sauce", price: 18 })
 
 function placeOrder(pizzaname: string) {
   const foundPizza = menu.find(pizzaObj => pizzaObj.name === pizzaname)
@@ -46,9 +47,8 @@ function placeOrder(pizzaname: string) {
 
   cashInRegister += foundPizza.price
 
-  const newOrder: Order = { 
-    id: orderId++,
-    pizza: foundPizza, 
+  const newOrder: Order = {
+    pizza: foundPizza,
     status: "ordered"
   }
 
@@ -62,23 +62,22 @@ placeOrder("Margerita")
 placeOrder("veggie POW")
 placeOrder("BBQ veggie")
 placeOrder("woowzi")
+placeOrder("no tomato sauce")
 
-function completeOrder(orderId: number) {
-  const order = orderQueue.find(order => order.id === orderId)
+function completeOrder(orderId: number): Order | undefined {
+  const order = orderQueue.find(order => order.pizza.id === orderId);
   if (order !== undefined) {
-    order.status = "completed"
-    
-    return order
+    order.status = "completed";
+    return order;
   }
-
+  
+  return undefined;
 }
 
-completeOrder(12)
-completeOrder(2)
-completeOrder(3)
+completeOrder(1)
+completeOrder(5)
+completeOrder(8)
 
 console.log("Menu:", menu)
 console.log("Cash in register:", cashInRegister)
 console.log("Order Qeue:", orderQueue)
-
-
