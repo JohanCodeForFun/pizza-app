@@ -83,7 +83,7 @@ console.log("Cash in register:", cashInRegister)
 console.log("Order Qeue:", orderQueue)
 
 
-function getPizzaDetail(identifier: string | number) {
+function getPizzaDetail(identifier: string | number): Pizza | undefined {
   if (typeof identifier === "string") {
     return menu.find(pizza => pizza.name.toLowerCase() === identifier.toLowerCase())
   } else if (typeof identifier === "number") {
