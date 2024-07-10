@@ -10,10 +10,12 @@ const menu: Pizza[] = [
   { id: nextPizzaId++, name: "Veggie", price: 9 },
 ]
 
-function addnewPizza(pizzaObj: Omit<Pizza, "id">): void {
+function addnewPizza(pizzaObj: Omit<Pizza, "id">): Pizza {
   const newPizza = { id: nextPizzaId++, ...pizzaObj }
   
   menu.push(newPizza)
+
+  return newPizza
 }
 
 type Order = {
@@ -97,7 +99,7 @@ function getPizzaDetail(identifier: string | number): Pizza | undefined {
 }
 
 console.log(getPizzaDetail(2))
-console.log(getPizzaDetail(3))
-console.log(getPizzaDetail(5))
+
+addnewPizza({ name: "bamse special", price: 13 })
 
 console.log("menu:", menu)
