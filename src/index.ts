@@ -1,16 +1,19 @@
-const menu: Pizza[] = [
-  { id: 1, name: "Margerita", price: 8 },
-  { id: 2, name: "Pepperoni", price: 10 },
-  { id: 3, name: "Hawaiian", price: 10 },
-  { id: 4, name: "Veggie", price: 9 },
-]
-
 let cashInRegister = 100
 const orderQueue: Order[] = [];
 let orderId = 1
+let nextPizzaId = 1
+
+const menu: Pizza[] = [
+  { id: nextPizzaId++, name: "Margerita", price: 8 },
+  { id: nextPizzaId++, name: "Pepperoni", price: 10 },
+  { id: nextPizzaId++, name: "Hawaiian", price: 10 },
+  { id: nextPizzaId++, name: "Veggie", price: 9 },
+]
 
 function addnewPizza(pizzaObj: Pizza): void {
-  menu.push(pizzaObj)
+  const newPizza = { id: nextPizzaId++, ...pizzaObj }
+  
+  menu.push(newPizza)
 }
 
 type Order = {
@@ -19,7 +22,7 @@ type Order = {
 }
 
 type Pizza = {
-  id: number
+  id?: number
   name: string;
   price: number
 }
@@ -33,10 +36,10 @@ const newPizza = {
   price: 12
 }
 
-addnewPizza({ id: 5, name: "woowzi", price: 12 })
-addnewPizza({ id: 6, name: "veggie POW", price: 15 })
-addnewPizza({ id: 7, name: "BBQ veggie", price: 18 })
-addnewPizza({ id: 8, name: "no tomato sauce", price: 18 })
+addnewPizza({ name: "woowzi", price: 12 })
+addnewPizza({ name: "veggie POW", price: 15 })
+addnewPizza({ name: "BBQ veggie", price: 18 })
+addnewPizza({ name: "no tomato sauce", price: 18 })
 
 function placeOrder(pizzaname: string): Order | undefined {
   const foundPizza = menu.find(pizzaObj => pizzaObj.name === pizzaname)
@@ -96,3 +99,5 @@ function getPizzaDetail(identifier: string | number): Pizza | undefined {
 console.log(getPizzaDetail(2))
 console.log(getPizzaDetail(3))
 console.log(getPizzaDetail(5))
+
+console.log("menu:", menu)
