@@ -104,4 +104,15 @@ function getPizzaDetail(identifier: string | number): Pizza | undefined {
 
 console.log(getPizzaDetail(2))
 
+// Generic function used to add an menu or order to
+// their respective arrays.
+function addToArray<T>(array: T[], item: T): T[] {
+  array.push(item)
+  return array
+}
+
+addToArray<Pizza>(menu, { id: nextPizzaId++, name: "Ufo Special", price: 18 })
+addToArray<Order>(orderQueue, { pizza: menu[2], status: "completed" })
+
 console.log("menu:", menu)
+console.log("order:", orderQueue)
